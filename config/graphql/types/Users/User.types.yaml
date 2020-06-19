@@ -1,0 +1,23 @@
+User:
+  type: object
+  config:
+    description: "User type"
+    fields:
+      id:
+        type: "Int!"
+      roles:
+        type: "[String]"
+      username:
+        type: "String"
+      email:
+        type: "String"
+      created_at:
+        type: "String"
+      updated_at:
+        type: "String"
+      blocked:
+        type: "Boolean"
+        description: "is blocked account?"
+      test:
+        type: "Boolean"
+        description: "is test account?"

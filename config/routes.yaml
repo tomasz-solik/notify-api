@@ -1,0 +1,11 @@
+login_check:
+  path:     /api/users/login_check
+  methods:  [POST]
+
+overblog_graphql_single_endpoint:
+  resource: "@OverblogGraphQLBundle/Resources/config/routing/single.yaml"
+  prefix: /api/query
+
+#overblog_graphql_multiple_endpoint:
+#  resource: "@OverblogGraphQLBundle/Resources/config/routing/multiple.yaml"
+#  prefix: /api/queries

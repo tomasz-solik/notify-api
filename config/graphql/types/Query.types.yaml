@@ -1,0 +1,24 @@
+Query:
+  type: object
+  config:
+    fields:
+      user:
+        type: "User"
+        description: "Single user query"
+        args:
+          id:
+            description: "Get user by ID"
+            type: "Int!"
+        resolve: "@=resolver('User', [args])"
+      users:
+        type: "[User!]"
+        description: "List of user query"
+        args:
+          blocked:
+            description: "is blocked ?"
+            type: "Boolean"
+          test:
+            description: "is test ?"
+            type: "Boolean"
+        resolve: "@=resolver('Users', [args])"
+
