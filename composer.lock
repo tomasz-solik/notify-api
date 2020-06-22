@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7348ac9481ce840daca76d87e62c2081",
+    "content-hash": "a711340d3ef3b0178553d3e0bd1177f6",
     "packages": [
         {
             "name": "composer/ca-bundle",
@@ -1594,6 +1594,62 @@
             "time": "2020-05-28T23:36:57+00:00"
         },
         {
+            "name": "malef/associate",
+            "version": "v0.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/malef/associate.git",
+                "reference": "f43b6d1fffb90474d629d19d0878b5e86542e455"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/malef/associate/zipball/f43b6d1fffb90474d629d19d0878b5e86542e455",
+                "reference": "f43b6d1fffb90474d629d19d0878b5e86542e455",
+                "shasum": ""
+            },
+            "require": {
+                "nicmart/tree": "^0.2.7",
+                "php": "^7.2",
+                "symfony/options-resolver": "^3.0|^4.0|^5.0",
+                "symfony/property-access": "^3.0|^4.0|^5.0"
+            },
+            "require-dev": {
+                "doctrine/orm": "^2.4,>=2.4.5",
+                "ext-sqlite3": "^7.2",
+                "friendsofphp/php-cs-fixer": "^2.16.3",
+                "nelmio/alice": "^3.5",
+                "overtrue/phplint": "^1.1",
+                "phpmd/phpmd": "^2.6",
+                "phpstan/phpstan": "^0.12",
+                "phpunit/dbunit": "^4.0",
+                "phpunit/phpunit": "^7.0",
+                "symfony/yaml": "^3.0|^4.0|^5.0",
+                "webonyx/graphql-php": "^0.9,>=0.9.0"
+            },
+            "suggest": {
+                "doctrine/orm": "^2.4,>=2.4.5",
+                "webonyx/graphql-php": "^0.9,>=0.9.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Malef\\Associate\\": "lib"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mariusz Bąk",
+                    "email": "mariusz.alef.bak@gmail.com"
+                }
+            ],
+            "description": "This library allows to collect objects through associations and provides entity loading optimizations for Doctrine ORM to address N+1 queries problem.",
+            "time": "2020-06-20T16:02:48+00:00"
+        },
+        {
             "name": "monolog/monolog",
             "version": "2.1.0",
             "source": {
@@ -1860,6 +1916,42 @@
                 "security"
             ],
             "time": "2020-05-11T08:12:17+00:00"
+        },
+        {
+            "name": "nicmart/tree",
+            "version": "v0.2.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nicmart/Tree.git",
+                "reference": "0616b54bb49938e1a816141d7943db48ebf76938"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nicmart/Tree/zipball/0616b54bb49938e1a816141d7943db48ebf76938",
+                "reference": "0616b54bb49938e1a816141d7943db48ebf76938",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Tree\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolò Martini",
+                    "email": "nicmartnic@gmail.com"
+                }
+            ],
+            "description": "A basic but flexible php tree data structure and a fluent tree builder implementation.",
+            "time": "2015-08-20T20:50:35+00:00"
         },
         {
             "name": "ocramius/package-versions",
