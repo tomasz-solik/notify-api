@@ -2,7 +2,8 @@
 
 namespace App\Controller\Api;
 
-use App\Services\Users\UsersService;
+use App\Services\Auth\LoginService;
+use App\Services\Auth\RegistrationService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -15,37 +16,24 @@ use Symfony\Component\Routing\Annotation\Route;
 class AuthController extends AbstractController
 {
     /**
-     * @var UsersService
-     */
-    private $userService;
-
-    /**
-     * UsersController constructor.
-     * @param UsersService $userService
-     */
-    public function __construct(
-        UsersService $userService
-    ) {
-        $this->userService = $userService;
-    }
-
-    /**
      * @Route("/registration", name="api_users_registration", methods={"POST"})
      * @param Request $request
+     * @param RegistrationService $registrationService
      * @return \Symfony\Component\HttpFoundation\JsonResponse
      */
-    public function registration(Request $request)
+    public function registration(Request $request, RegistrationService $registrationService)
     {
-        return $this->userService->create($request);
+        return $registrationService->registration($request);
     }
 
     /**
      * @Route("/login", name="api_users_login", methods={"POST"})
      * @param Request $request
+     * @param LoginService $loginService
      * @return \Symfony\Component\HttpFoundation\JsonResponse
      */
-    public function login(Request $request)
+    public function login(Request $request, LoginService $loginService)
     {
-        return $this->userService->login($request);
+        return $loginService->login($request);
     }
 }
