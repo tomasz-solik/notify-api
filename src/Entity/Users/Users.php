@@ -2,7 +2,12 @@
 
 namespace App\Entity\Users;
 
+use App\Entity\Channels\ChannelTemplatesUsers;
+use App\Entity\Channels\ChannelsUsers;
+use App\Entity\Channels\NewsReads;
 use App\Repository\Users\UsersRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -69,6 +74,21 @@ class Users implements UserInterface
      */
     private $ghost;
 
+    /**
+     * @ORM\OneToMany(targetEntity=NewsReads::class, mappedBy="users")
+     */
+    private $newsReads;
+
+    /**
+     * @ORM\OneToMany(targetEntity=ChannelsUsers::class, mappedBy="users")
+     */
+    private $channelsUsers;
+
+    /**
+     * @ORM\OneToMany(targetEntity=ChannelTemplatesUsers::class, mappedBy="users")
+     */
+    private $channelTemplatesUsers;
+
     public function __construct()
     {
         $this->role = UsersRepository::ROLE_USER;
@@ -77,6 +97,9 @@ class Users implements UserInterface
         $this->blocked = false;
         $this->test = false;
         $this->ghost = false;
+        $this->newsReads = new ArrayCollection();
+        $this->channelsUsers = new ArrayCollection();
+        $this->channelTemplatesUsers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -219,6 +242,99 @@ class Users implements UserInterface
     public function setGhost(bool $ghost): self
     {
         $this->ghost = $ghost;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|NewsReads[]
+     */
+    public function getNewsReads(): Collection
+    {
+        return $this->newsReads;
+    }
+
+    public function addNewsRead(NewsReads $newsRead): self
+    {
+        if (!$this->newsReads->contains($newsRead)) {
+            $this->newsReads[] = $newsRead;
+            $newsRead->setUsers($this);
+        }
+
+        return $this;
+    }
+
+    public function removeNewsRead(NewsReads $newsRead): self
+    {
+        if ($this->newsReads->contains($newsRead)) {
+            $this->newsReads->removeElement($newsRead);
+            // set the owning side to null (unless already changed)
+            if ($newsRead->getUsers() === $this) {
+                $newsRead->setUsers(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ChannelsUsers[]
+     */
+    public function getChannelsUsers(): Collection
+    {
+        return $this->channelsUsers;
+    }
+
+    public function addChannelsUser(ChannelsUsers $channelsUser): self
+    {
+        if (!$this->channelsUsers->contains($channelsUser)) {
+            $this->channelsUsers[] = $channelsUser;
+            $channelsUser->setUsers($this);
+        }
+
+        return $this;
+    }
+
+    public function removeChannelsUser(ChannelsUsers $channelsUser): self
+    {
+        if ($this->channelsUsers->contains($channelsUser)) {
+            $this->channelsUsers->removeElement($channelsUser);
+            // set the owning side to null (unless already changed)
+            if ($channelsUser->getUsers() === $this) {
+                $channelsUser->setUsers(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ChannelTemplatesUsers[]
+     */
+    public function getChannelTemplatesUsers(): Collection
+    {
+        return $this->channelTemplatesUsers;
+    }
+
+    public function addChannelTemplatesUser(ChannelTemplatesUsers $channelTemplatesUser): self
+    {
+        if (!$this->channelTemplatesUsers->contains($channelTemplatesUser)) {
+            $this->channelTemplatesUsers[] = $channelTemplatesUser;
+            $channelTemplatesUser->setUsers($this);
+        }
+
+        return $this;
+    }
+
+    public function removeChannelTemplatesUser(ChannelTemplatesUsers $channelTemplatesUser): self
+    {
+        if ($this->channelTemplatesUsers->contains($channelTemplatesUser)) {
+            $this->channelTemplatesUsers->removeElement($channelTemplatesUser);
+            // set the owning side to null (unless already changed)
+            if ($channelTemplatesUser->getUsers() === $this) {
+                $channelTemplatesUser->setUsers(null);
+            }
+        }
 
         return $this;
     }

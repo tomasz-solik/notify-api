@@ -8,8 +8,7 @@
 
 namespace App\GraphQL\Resolver\Users;
 
-use App\Entity\Users\Users;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Services\Users\UsersService;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\AliasedInterface;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
@@ -17,13 +16,13 @@ use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 class UserResolver implements ResolverInterface, AliasedInterface
 {
     /**
-     * @var EntityManagerInterface
+     * @var UsersService
      */
-    private $em;
+    private $usersService;
 
-    public function __construct(EntityManagerInterface $em)
+    public function __construct(UsersService $usersService)
     {
-        $this->em = $em;
+        $this->usersService = $usersService;
 
     }
 
@@ -44,6 +43,6 @@ class UserResolver implements ResolverInterface, AliasedInterface
 
     public function resolve(Argument $argument)
     {
-        return $this->em->getRepository(Users::class)->find($argument->offsetGet('id'));
+        return $this->usersService->getById($argument->offsetGet('id'));
     }
 }

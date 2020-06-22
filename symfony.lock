@@ -120,6 +120,9 @@
             "config/packages/lexik_jwt_authentication.yaml"
         ]
     },
+    "malef/associate": {
+        "version": "v0.2.0"
+    },
     "monolog/monolog": {
         "version": "2.1.0"
     },
@@ -149,6 +152,9 @@
         "files": [
             "config/packages/nelmio_security.yaml"
         ]
+    },
+    "nicmart/tree": {
+        "version": "v0.2.7"
     },
     "nikic/php-parser": {
         "version": "v4.5.0"

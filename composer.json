@@ -7,6 +7,7 @@
         "ext-iconv": "*",
         "ext-json": "*",
         "lexik/jwt-authentication-bundle": "^2.7",
+        "malef/associate": "^0.2.0",
         "nelmio/cors-bundle": "^2.0",
         "nelmio/security-bundle": "^2.9",
         "overblog/graphql-bundle": "^0.13.2",
