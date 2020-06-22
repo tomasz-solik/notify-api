@@ -8,8 +8,7 @@
 
 namespace App\GraphQL\Resolver\Users;
 
-use App\Entity\Users\Users;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Services\Users\UsersService;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\AliasedInterface;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
@@ -17,13 +16,13 @@ use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 class UsersResolver implements ResolverInterface, AliasedInterface
 {
     /**
-     * @var EntityManagerInterface
+     * @var UsersService
      */
-    private $em;
+    private $usersService;
 
-    public function __construct(EntityManagerInterface $em)
+    public function __construct(UsersService $usersService)
     {
-        $this->em = $em;
+        $this->usersService = $usersService;
 
     }
 
@@ -44,13 +43,6 @@ class UsersResolver implements ResolverInterface, AliasedInterface
 
     public function resolve(Argument $argument)
     {
-        if(!empty($argument->offsetGet('test'))){
-            $criteria['test'] = $argument->offsetGet('test');
-        }
-        if(!empty($argument->offsetGet('blocked'))){
-            $criteria['blocked'] = $argument->offsetGet('blocked');
-        }
-        $criteria['ghost'] = false;
-        return $this->em->getRepository(Users::class)->findBy($criteria);
+        return $this->usersService->getAll($argument);
     }
 }

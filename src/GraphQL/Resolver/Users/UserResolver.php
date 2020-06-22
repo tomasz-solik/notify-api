@@ -43,6 +43,6 @@ class UserResolver implements ResolverInterface, AliasedInterface
 
     public function resolve(Argument $argument)
     {
-        return $this->usersService->getById($argument->offsetGet('id'));
+        return $this->usersService->getOne($argument);
     }
 }

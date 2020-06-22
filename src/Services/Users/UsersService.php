@@ -10,6 +10,7 @@ namespace App\Services\Users;
 
 use App\Entity\Users\Users;
 use Doctrine\ORM\EntityManagerInterface;
+use Overblog\GraphQLBundle\Definition\Argument;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -46,21 +47,43 @@ class UsersService
     }
 
     /**
-     * @param int $id
+     * @param Argument $argument
      * @return object|null
      */
-    public function getById(int $id)
+    public function getOne(Argument $argument)
     {
         try {
-
             return $this->em->getRepository(Users::class)->findOneBy([
-                'id' => $id,
-                'ghost' => false
+                'id' => $argument->offsetGet('id'),
+                'ghost' => false,
             ]);
-
         } catch (\Exception $ex) {
             $this->logger->critical(__METHOD__, ['ex' => $ex->getMessage()]);
         }
 
     }
+
+    /**
+     * @param Argument $argument
+     * @return object|null
+     */
+    public function getAll(Argument $argument)
+    {
+        try {
+            if (!empty($argument->offsetGet('test'))) {
+                $criteria['test'] = $argument->offsetGet('test');
+            }
+            if (!empty($argument->offsetGet('blocked'))) {
+                $criteria['blocked'] = $argument->offsetGet('blocked');
+            }
+            $criteria['ghost'] = false;
+
+            return $this->em->getRepository(Users::class)->findBy($criteria);
+        } catch (\Exception $ex) {
+            $this->logger->critical(__METHOD__, ['ex' => $ex->getMessage()]);
+        }
+
+    }
+
+
 }
