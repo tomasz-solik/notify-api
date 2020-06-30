@@ -1,0 +1,11 @@
+Channel:
+  type: object
+  config:
+    description: "My channel"
+    fields:
+      id:
+        type: "Int!"
+      name:
+        type: "String"
+      path_to_icon:
+        type: "String"
