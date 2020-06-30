@@ -2,13 +2,20 @@
 
 namespace App\DataFixtures\Users;
 
+use App\Entity\Channels\Channels;
+use App\Entity\Channels\ChannelsUsers;
 use App\Entity\Users\Users;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UsersFixtures extends Fixture
 {
+    /**
+     * @var EntityManagerInterface
+     */
+    private $em;
     /**
      * @var UserPasswordEncoderInterface
      */
@@ -16,10 +23,14 @@ class UsersFixtures extends Fixture
 
     /**
      * UsersFixtures constructor.
+     * @param EntityManagerInterface $em
      * @param UserPasswordEncoderInterface $encoder
      */
-    public function __construct(UserPasswordEncoderInterface $encoder)
-    {
+    public function __construct(
+        EntityManagerInterface $em,
+        UserPasswordEncoderInterface $encoder
+    ) {
+        $this->em = $em;
         $this->encoder = $encoder;
     }
 
@@ -63,7 +74,26 @@ class UsersFixtures extends Fixture
                 ->setUsername($u['username'])
                 ->setPassword($this->encoder->encodePassword($user, $u['password']));
             $manager->persist($user);
+            $this->fixtureChannelsUsers($manager, $user);
 
+        }
+        $manager->flush();
+    }
+
+    /**
+     * @param ObjectManager $manager
+     * @param Users $user
+     */
+    private function fixtureChannelsUsers(ObjectManager $manager, Users $user)
+    {
+        $channels = $this->em->getRepository(Channels::class)->findAll();
+        foreach ($channels as $channel) {
+            $channelsUsers = (new ChannelsUsers())
+                ->setChannel($channel)
+                ->setUsers($user)
+                ->setRole(1)
+                ->setNotify(0);
+            $manager->persist($channelsUsers);
         }
         $manager->flush();
     }

@@ -47,4 +47,7 @@ class ChannelsUsersRepository extends ServiceEntityRepository
         ;
     }
     */
+    public const ROLE_USER = 1;
+    public const ROLE_MODERATOR = 2;
+    public const ROLE_ADMIN = 3;
 }

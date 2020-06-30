@@ -1,0 +1,19 @@
+New:
+  type: object
+  config:
+    description: "New"
+    fields:
+      id:
+        type: "Int!"
+      title:
+        type: "String"
+      content:
+        type: "String"
+      path_to_image:
+        type: "String"
+      published_at:
+        type: "String"
+      draft:
+        type: "Boolean"
+      channel:
+        type: "Channel!"

@@ -1,0 +1,15 @@
+ChannelUser:
+  type: object
+  config:
+    description: "My channels"
+    fields:
+      id:
+        type: "Int!"
+      role:
+        type: "Int!"
+      read_at:
+        type: "String"
+      notify:
+        type: "Int!"
+      channel:
+        type: "Channel"

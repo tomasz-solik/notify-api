@@ -21,4 +21,25 @@ Query:
             description: "is test ?"
             type: "Boolean"
         resolve: "@=resolver('Users', [args])"
+      channels_user:
+        type: "[ChannelUser!]"
+        description: "List of my channels"
+        resolve: "@=resolver('ChannelsUser')"
+      new:
+        type: "New"
+        description: "Single new query"
+        args:
+          id:
+            type: "Int!"
+            description: "Get new by ID"
+        resolve: "@=resolver('New', [args])"
+      news:
+        type: "[New!]"
+        description: "List news"
+        args:
+          channel_id:
+            type: "Int"
+            description: "Get new by ID channel"
+        resolve: "@=resolver('News', [args])"
+
 

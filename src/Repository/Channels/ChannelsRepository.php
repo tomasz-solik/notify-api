@@ -47,4 +47,7 @@ class ChannelsRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public const TYPE_PUBLIC = 1;
+    public const TYPE_PRIVATE = 2;
 }
